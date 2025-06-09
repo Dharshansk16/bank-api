@@ -30,6 +30,7 @@ DJANGO_APPS = [
     'django.contrib.humanize', 
 ]
 
+
 #new
 THIRD_PARTY_APPS = [
     "rest_framework",
