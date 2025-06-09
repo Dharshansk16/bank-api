@@ -6,7 +6,7 @@ from os import getenv, path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent # 3xparent-go three level up
 
-APPS_DIR = BASE_DIR/ "core_apps"
+APPS_DIR = BASE_DIR/"core_apps"
 local_env_file= path.join(BASE_DIR , ".envs", ".env.local") # create a local_env_file
                                                             # BASE_DIR/.envs/.env.local/
  
@@ -45,7 +45,11 @@ THIRD_PARTY_APPS = [
     "django_celery_beat",
 ]
 
-LOCAL_APPS = []
+LOCAL_APPS = [
+    "core_apps.user_auth",
+    "core_apps.user_profile",
+    "core_apps.common",
+]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS #Concatenated all
 
