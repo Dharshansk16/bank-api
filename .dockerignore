@@ -1,0 +1,11 @@
+.git/
+*./pyc
+*.pyo
+__pycache__/
+.vscode
+djangoenv/
+.venv/
+.djangoenv/
+staticfiles/
+.envs/*
+
