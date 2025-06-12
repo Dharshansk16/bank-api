@@ -1,0 +1,29 @@
+{% extends "emails/base.html" %} {% block title %}Account Temporarily Locked{%
+endblock %} {% block content %}
+<h2 style="margin-bottom: 16px">Account Access Restricted</h2>
+
+<p>Dear {{ user.full_name }},</p>
+
+<p>
+  We have temporarily locked your account due to multiple unsuccessful login
+  attempts. This is a security measure to protect your information.
+</p>
+
+<p>
+  Your account will remain locked for the next
+  <strong>{{ lockout_duration }} minutes</strong>. During this time, you will
+  not be able to access your account.
+</p>
+
+<p>
+  If you did not attempt to log in, we recommend contacting our support team
+  immediately to ensure your account's safety.
+</p>
+
+<p>
+  We appreciate your understanding and are here to help if you need assistance.
+</p>
+
+<p>Best regards,</p>
+<p><strong>The {{ site_name }} Team</strong></p>
+{% endblock content %}

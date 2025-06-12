@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 from .base import * # noqa
 from .base import BASE_DIR
 
+
 local_env_file = path.join(BASE_DIR, ".envs" ,".env.local")
 if path.isfile(local_env_file):
     load_dotenv(local_env_file)
@@ -31,3 +32,15 @@ DOMAIN = getenv("DOMAIN")
 
 
 MAX_UPLOAD_SIZE =1*1024*1024
+
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8080"]
+
+#how long the user will be logged out after multiple failed log in attempts
+LOCKOUT_DURATION =  timedelta(minutes=1)
+
+LOGIN_ATTEMPTS = 3
+
+OTP_EXPIRATION = timedelta(minutes=1)
+
+
+
