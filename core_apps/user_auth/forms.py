@@ -91,4 +91,4 @@ class UserChangeForm(DjangoUserChangeForm):
             if not security_answer:
                 self.add_error("security_answer", _("Security answer is required for regular users"))
         return cleaned_data
-    
+
