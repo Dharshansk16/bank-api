@@ -62,6 +62,7 @@ class CustomUserAdmin(UserAdmin):
                     ),
             },
          ),
+         (
         _("Permissions and Groups"),
         {
             "fields":(
@@ -72,6 +73,7 @@ class CustomUserAdmin(UserAdmin):
                 "user_permissions",
             ),
         },
+         ),
         (
             _("Important dates"),
             {
