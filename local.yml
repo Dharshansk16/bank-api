@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   api: &api
     build:
@@ -6,14 +8,15 @@ services:
     volumes:
       - .:/app:z
       - ./staticfiles:/app/staticfiles
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000" # Internal only
     env_file:
       - ./.envs/.env.local
     depends_on:
       - postgres
       - mailpit
     command: /start.sh
+    restart: unless-stopped
     networks:
       - banker_local_nw
 
@@ -27,6 +30,7 @@ services:
       - banker_local_db:/var/lib/postgresql/data
     env_file:
       - ./.envs/.env.local
+    restart: unless-stopped
     networks:
       - banker_local_nw
 
@@ -37,12 +41,27 @@ services:
       - "1025:1025"
     volumes:
       - banker_mailpit_db:/data
-
     environment:
       MP_MAX_MESSAGES: 5000
       MP_DATA_FILE: /data/mailpit.db
       MP_SMTP_AUTH_ACCEPT_ANY: 1
       MP_SMTP_AUTH_ALLOW_INSECURE: 1
+    restart: unless-stopped
+    networks:
+      - banker_local_nw
+
+  nginx:
+    build:
+      context: ./docker/local/nginx
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./staticfiles:/app/staticfiles
+      - logs_store:/var/log/nginx
+    depends_on:
+      - api
     networks:
       - banker_local_nw
 
@@ -53,3 +72,4 @@ networks:
 volumes:
   banker_local_db:
   banker_mailpit_db:
+  logs_store:
